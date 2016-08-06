@@ -7,11 +7,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#000000"
+    android:background="#ffffff"
     tools:context="com.abner.bezier.MainActivity">
 
-    <com.abner.bezier.BezierView
-        android:background="#ffffff"
-        android:layout_width="300dp"
-        android:layout_height="300dp" />
+    <!--<com.abner.bezier.WaterView-->
+        <!--android:background="#ffffff"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="300dp" />-->
+    <com.abner.bezier.BubbleView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

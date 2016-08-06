@@ -16,9 +16,9 @@ import java.text.NumberFormat;
 /**
  * Created by abner on 2016/7/15.
  */
-public class BezierView extends View {
+public class WaterView extends View {
 
-    public BezierView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WaterView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -33,12 +33,12 @@ public class BezierView extends View {
     private PointF mPointF = new PointF(0, 0);
 
 
-    public BezierView(Context context) {
+    public WaterView(Context context) {
         this(context, null);
 
     }
 
-    public BezierView(Context context, AttributeSet attrs) {
+    public WaterView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         mPaint = new Paint();
