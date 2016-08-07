@@ -27,6 +27,7 @@ public class BubbleView extends View {
     private float anchorY;
 
     private float radius = 50;
+    private float radius2 = 50;
 
     private boolean isMove = false;
 
@@ -59,19 +60,26 @@ public class BubbleView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 //        super.onDraw(canvas);
-        canvas.drawCircle(startX, startY, radius, paint);
+        if (!isMove)
+        canvas.drawCircle(startX, startY, radius2, paint);
         if (isMove)
         {
+
+
             Log.d("TAG","---------------------draw");
             anchorX =  (moveX+ startX)/2;
             anchorY =  (moveY + startY)/2;
             float offsetX = (float) (radius*Math.sin(Math.atan((moveY - startY) / (moveX - startX))));
             float offsetY = (float) (radius*Math.cos(Math.atan((moveY - startY) / (moveX - startX))));
+            float distance = (float) Math.sqrt(Math.pow(moveY-startY, 2) + Math.pow(moveX-startX, 2));
+            radius2 = -distance/15+50;
+            float offsetX2 = (float) (radius2*Math.sin(Math.atan((moveY - startY) / (moveX - startX))));
+            float offsetY2 = (float) (radius2*Math.cos(Math.atan((moveY - startY) / (moveX - startX))));
 
 
 
-            float x1 = startX - offsetX;
-            float y1 = startY + offsetY;
+            float x1 = startX - offsetX2;
+            float y1 = startY + offsetY2;
 
             float x2 = moveX - offsetX;
             float y2 = moveY + offsetY;
@@ -79,8 +87,8 @@ public class BubbleView extends View {
             float x3 = moveX + offsetX;
             float y3 = moveY - offsetY;
 
-            float x4 = startX + offsetX;
-            float y4 = startY - offsetY;
+            float x4 = startX + offsetX2;
+            float y4 = startY - offsetY2;
 
             Log.d("TAG", "anchorX :"+anchorX+"\n"+
                                 "anchorY: "+anchorY +"\n"+
@@ -94,14 +102,16 @@ public class BubbleView extends View {
                     "y4:"+y4+"\n"+""
 
             );
-
-            path.reset();
-            path.moveTo(x1, y1);
-            path.quadTo(anchorX, anchorY, x2, y2);
-            path.lineTo(x3, y3);
-            path.quadTo(anchorX, anchorY, x4, y4);
+            if (!(radius2<=10)) {
+                canvas.drawCircle(startX, startY, radius2, paint);
+                path.reset();
+                path.moveTo(x1, y1);
+                path.quadTo(anchorX, anchorY, x2, y2);
+                path.lineTo(x3, y3);
+                path.quadTo(anchorX, anchorY, x4, y4);
 //            path.lineTo(x1, y1);
-            canvas.drawPath(path, paint);
+                canvas.drawPath(path, paint);
+            }
             canvas.drawCircle(moveX, moveY, radius, paint);
         }
 
@@ -130,6 +140,7 @@ public class BubbleView extends View {
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
             isMove = false;
+            radius2 = 50;
             invalidate();
         }
 
